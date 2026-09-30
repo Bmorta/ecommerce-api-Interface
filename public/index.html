@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Capstone Store</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="brand">
+        <div class="logo">C2</div>
+
+        <div>
+          <h1>Capstone Store</h1>
+          <p>E-Commerce Product Manager</p>
+        </div>
+      </div>
+
+      <button id="addBtn" class="btn primary">+ Add Product</button>
+    </header>
+
+    <main class="container">
+      <section class="intro">
+        <div>
+          <span class="tag">MSTCONNECT PH • CAPSTONE 2</span>
+
+          <h2>Products</h2>
+
+          <p>
+            Simple interface connected to the Capstone 2 REST API and MongoDB.
+          </p>
+        </div>
+
+        <div id="apiStatus" class="status"><span></span> Checking API...</div>
+      </section>
+
+      <section class="toolbar">
+        <input id="search" type="search" placeholder="Search product name..." />
+
+        <select id="category">
+          <option value="">All categories</option>
+        </select>
+
+        <button id="clearBtn" class="btn secondary">Clear</button>
+      </section>
+
+      <div class="summary">
+        <span id="count">0 products</span>
+
+        <span id="stock">Stock: 0</span>
+      </div>
+
+      <div id="loading" class="notice">Loading products...</div>
+
+      <div id="empty" class="notice hidden">No products found.</div>
+
+      <section id="products" class="grid"></section>
+    </main>
+
+    <!-- ADD / EDIT PRODUCT MODAL -->
+
+    <div id="modal" class="modal hidden">
+      <div class="backdrop" data-close></div>
+
+      <div class="modal-card">
+        <div class="modal-top">
+          <div>
+            <span class="tag">PRODUCT</span>
+
+            <h2 id="modalTitle">Add Product</h2>
+          </div>
+
+          <button class="close" data-close>×</button>
+        </div>
+
+        <form id="form">
+          <input id="id" type="hidden" />
+
+          <label>
+            Name *
+            <input id="name" required />
+          </label>
+
+          <label>
+            Description *
+            <textarea id="description" rows="3" required></textarea>
+          </label>
+
+          <div class="two">
+            <label>
+              Price *
+              <input id="price" type="number" min="0" step="0.01" required />
+            </label>
+
+            <label>
+              Stock *
+              <input id="stockInput" type="number" min="0" step="1" required />
+            </label>
+          </div>
+
+          <label>
+            Category *
+            <input id="categoryInput" required />
+          </label>
+
+          <div id="formError" class="error hidden"></div>
+
+          <div class="actions">
+            <button type="button" class="btn secondary" data-close>
+              Cancel
+            </button>
+
+            <button class="btn primary" id="saveBtn">Save Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- DELETE CONFIRMATION MODAL -->
+
+    <div id="confirm" class="modal hidden">
+      <div class="backdrop"></div>
+
+      <div class="modal-card small">
+        <span class="tag">CONFIRM</span>
+
+        <h2>Delete product?</h2>
+
+        <p>This action cannot be undone.</p>
+
+        <div class="actions">
+          <button id="cancelDelete" class="btn secondary">Cancel</button>
+
+          <button id="confirmDelete" class="btn danger">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST MESSAGE -->
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

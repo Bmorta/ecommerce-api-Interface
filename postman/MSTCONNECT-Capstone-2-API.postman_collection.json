@@ -1,0 +1,276 @@
+{
+  "info": {
+    "name": "MSTCONNECT Capstone 2 API",
+    "_postman_id": "mstconnect-capstone-2-products",
+    "description": "Required Capstone 2 product CRUD, search/filter, and failure-case requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "productId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mechanical Keyboard\",\n  \"description\": \"RGB mechanical keyboard\",\n  \"price\": 1850,\n  \"category\": \"Accessories\",\n  \"stock\": 12\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          }
+        },
+        {
+          "name": "View Product by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/products/{{productId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "{{productId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 1700,\n  \"stock\": 8\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products/{{productId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "{{productId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/products/{{productId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "{{productId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/products?search=keyboard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "keyboard"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Filter Products by Category",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/products?category=Accessories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Accessories"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Product - Missing Name",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Invalid product\",\n  \"price\": 500,\n  \"category\": \"Test\",\n  \"stock\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Product - Negative Price",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": -500\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products/{{productId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "{{productId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "View Product - Invalid ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/products/abc",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "abc"
+              ]
+            }
+          }
+        },
+        {
+          "name": "View Product - Missing Product",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/products/000000000000000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "000000000000000000000000"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Product - Missing Product",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/products/000000000000000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "000000000000000000000000"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
