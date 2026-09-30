@@ -161,3 +161,69 @@ ecommerce-api-Interface/
 ├── package.json
 ├── package-lock.json
 └── README.md
+
+## Installation
+
+1. Clone the repository.
+2. Open the project in VS Code.
+3. Run `npm install`.
+4. Create `.env` in the project root.
+5. Add:
+
+```env
+PORT=5000
+MONGO_URI=your_connection_string
+```
+
+6. Run `npm run dev`.
+7. Open `http://localhost:5000`.
+
+Never commit the real `.env` file or database credentials.
+
+## Base URL
+
+```text
+http://localhost:5000
+```
+
+## Search / Filter
+
+```text
+GET /api/products?category=Accessories
+GET /api/products?search=mouse
+GET /api/products?category=Accessories&search=wireless
+```
+
+## Example Request Body
+
+```json
+{
+  "name": "Mechanical Keyboard",
+  "description": "RGB keyboard",
+  "price": 1850,
+  "category": "Accessories",
+  "stock": 12
+}
+```
+
+## Expected Status Codes
+
+- `200 OK` - successful GET, PATCH, or DELETE
+- `201 Created` - successful POST
+- `400 Bad Request` - missing/invalid input or malformed ID
+- `404 Not Found` - product does not exist
+- `500 Server Error` - unexpected backend failure
+
+## Postman
+
+Import `postman/MSTCONNECT-Capstone-2-API.postman_collection.json`. Set `baseUrl` to `http://localhost:5000`.
+
+The collection includes CRUD requests plus failure-case requests for missing name, negative price, invalid ID, missing product, and deleting a missing product.
+
+## CRUD Test Flow
+
+```text
+POST → copy ID → GET → PATCH → GET → DELETE → GET
+```
+
+The final GET should return `404 Not Found`.
